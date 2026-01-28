@@ -1,0 +1,74 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0s00kpvfwob0"]
+
+[ext_resource type="Texture2D" uid="uid://g3y7dclrbuax" path="res://GUI/MainMenu/Main_menue_test.png" id="1_cyydq"]
+[ext_resource type="Script" uid="uid://cb5ilfekfb37e" path="res://GUI/MainMenu/main_menu.gd" id="1_idjik"]
+[ext_resource type="FontFile" uid="uid://ctjlorknwrmhg" path="res://GUI/fonts/m5x7.ttf" id="3_rcuwq"]
+
+[node name="MainMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_idjik")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_cyydq")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 60
+
+[node name="Seperator" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 270
+theme_override_constants/margin_top = 300
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Sart" type="Button" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.245997, 0.125044, 0.0821146, 1)
+theme_override_fonts/font = ExtResource("3_rcuwq")
+theme_override_font_sizes/font_size = 180
+text = "START"
+flat = true
+
+[node name="Quit" type="Button" parent="MarginContainer/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.245997, 0.125044, 0.0821146, 1)
+theme_override_fonts/font = ExtResource("3_rcuwq")
+theme_override_font_sizes/font_size = 180
+text = "QUIT"
+flat = true

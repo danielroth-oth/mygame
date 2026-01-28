@@ -1,0 +1,118 @@
+extends CanvasLayer
+
+@export var button_focus_audio : AudioStream = preload("res://GUI/MainMenu/audio/menu_focus.wav")
+@export var button_select_audio : AudioStream = preload("res://GUI/MainMenu/audio/menu_select.wav")
+
+var hearts : Array[ HeartGUI ] = []
+
+
+@onready var game_over = $GameOver
+@onready var title_button = $GameOver/VBoxContainer/titleButton
+@onready var continue_button = $GameOver/VBoxContainer/continueButton
+@onready var animation_player = $GameOver/AnimationPlayer
+@onready var audio = $AudioStreamPlayer2D
+
+
+@onready var notification : NotificationUI = $Control/Notification
+
+@onready var level_name_label  = $LevelName/LevelNameLabel
+@onready var animation_level_name = $LevelName/AnimationPlayer
+
+
+
+func _ready():
+	for child in $Control/HFlowContainer.get_children():
+		if child is HeartGUI:
+			hearts.append( child )
+			child.visible = false
+	
+	hide_game_over_screen()
+	continue_button.focus_entered.connect( play_audio.bind( button_focus_audio ) )
+	continue_button.pressed.connect( load_game )
+	title_button.focus_entered.connect( play_audio.bind( button_focus_audio ) )
+	title_button.pressed.connect( title_screen )
+	GlobalLevelManager.level_load_started.connect( hide_game_over_screen )
+	pass
+
+
+
+func update_hp( _hp : int , _max_hp: int ) -> void:
+	update_max_hp( _max_hp )
+	for i in _max_hp :
+		update_heart( i, _hp )
+		pass
+	pass
+
+
+func update_heart( _index : int, _hp : int ) -> void:
+	var _value : int = clampi( _hp - _index * 2, 0, 2 )
+	hearts[ _index ].value = _value
+	pass
+
+
+func update_max_hp( _max_hp : int ) -> void:
+	var _heart_count : int = roundi( _max_hp * 0.5 )
+	for i in hearts.size():
+		if i < _heart_count:
+			hearts[i].visible = true
+		else:
+			hearts[i].visible = false
+	pass
+
+
+func show_game_over_screen() -> void:
+	game_over.visible = true
+	game_over.mouse_filter = Control.MOUSE_FILTER_STOP
+	
+	var can_continue : bool = SaveManager.get_save_file() != null
+	continue_button.visible = can_continue
+	
+	animation_player.play("show_game_over")
+	await  animation_player.animation_finished
+	
+	if can_continue == true:
+		continue_button.grab_focus()
+	else :
+		title_button.grab_focus()
+	
+
+
+
+func hide_game_over_screen() -> void:
+	game_over.visible = false
+	game_over.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	game_over.modulate = Color(1, 1, 1, 0)
+
+
+func load_game() -> void:
+	play_audio( button_select_audio )
+	await fade_to_black()
+	SaveManager.load_game()
+
+
+func title_screen() -> void:
+	play_audio( button_select_audio )
+	await fade_to_black()
+	GlobalLevelManager.load_new_level("res://GUI/MainMenu/Main_Menu.tscn","",Vector2.ZERO)
+
+
+
+func fade_to_black() -> bool:
+	animation_player.play("fade_to_black")
+	await animation_player.animation_finished
+	PlayerManager.player.revive_player()
+	return true
+
+
+func play_audio( _a : AudioStream ) -> void:
+	audio.stream = _a
+	audio.play()
+
+func queue_notification( _title : String, _message : String ) -> void:
+	notification.add_notification_to_queue( _title, _message )
+	pass
+
+
+func show_level_name( _n : String ) -> void:
+	animation_level_name.play("show_level_name")
+	level_name_label.text = _n

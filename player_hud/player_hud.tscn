@@ -1,0 +1,659 @@
+[gd_scene load_steps=22 format=3 uid="uid://u714c0o1jon7"]
+
+[ext_resource type="Script" uid="uid://bjekogcaw2d7s" path="res://GUI/player_hud/player_hud.gd" id="1_oghrr"]
+[ext_resource type="PackedScene" uid="uid://cdyeam17sfdtx" path="res://GUI/player_hud/heart_gui.tscn" id="2_alx7a"]
+[ext_resource type="Script" uid="uid://8i7g63f3d44r" path="res://GUI/player_hud/notifications.gd" id="4_sysqg"]
+[ext_resource type="AudioStream" uid="uid://dls13edqenwoq" path="res://GUI/player_hud/notification.wav" id="5_sysqg"]
+[ext_resource type="FontFile" uid="uid://ctjlorknwrmhg" path="res://GUI/fonts/m5x7.ttf" id="5_yhjvm"]
+[ext_resource type="Texture2D" uid="uid://nce2sgl38v22" path="res://player/sprites/Judo_Sprite_Sheet.png" id="6_rxq5y"]
+[ext_resource type="FontFile" uid="uid://u1f3vnwg1s5o" path="res://GUI/fonts/Abaddon Bold.ttf" id="7_rxq5y"]
+[ext_resource type="FontFile" uid="uid://oqxn7wvf0c4c" path="res://assets/NESCyrillic.ttf" id="8_5bkpt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4b3j6"]
+content_margin_left = 35.0
+content_margin_top = 20.0
+content_margin_right = 35.0
+content_margin_bottom = 35.0
+bg_color = Color(0.209, 0.211, 0.289, 0.415)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="Animation" id="Animation_yhjvm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(30, 30)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PanelContainer:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_4b3j6"]
+resource_name = "show_notification"
+length = 3.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PanelContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 2.72621, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(30, 0), Vector2(30, 30), Vector2(30, 30), Vector2(30, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 2.72621, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PanelContainer:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../AudioStreamPlayer2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_sysqg")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/3/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yhjvm"]
+_data = {
+&"RESET": SubResource("Animation_yhjvm"),
+&"show_notification": SubResource("Animation_4b3j6")
+}
+
+[sub_resource type="FontVariation" id="FontVariation_5bkpt"]
+base_font = ExtResource("7_rxq5y")
+spacing_glyph = 50
+
+[sub_resource type="Animation" id="Animation_5bkpt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GameOver/FadeToBlack:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.006, 0.006, 0.006, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GameOver:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GameOver/Label:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(524, 261)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GameOver/Label:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GameOver/VBoxContainer:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GameOver/VBoxContainer:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(858.5, 492)]
+}
+
+[sub_resource type="Animation" id="Animation_scbx3"]
+resource_name = "fade_to_black"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GameOver/FadeToBlack:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.006, 0.006, 0.006, 0), Color(0.006, 0.006, 0.006, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GameOver:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GameOver/Label:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(524, 261)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GameOver/Label:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rxq5y"]
+resource_name = "show_game_over"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GameOver/FadeToBlack:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.006, 0.006, 0.006, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GameOver:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.733333, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GameOver/Label:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2.99902, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(524, 368), Vector2(524, 261)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GameOver/Label:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(3, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GameOver/VBoxContainer:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(3, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GameOver/VBoxContainer:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(3.00415, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(858.5, 439), Vector2(858.5, 492)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_scbx3"]
+_data = {
+&"RESET": SubResource("Animation_5bkpt"),
+&"fade_to_black": SubResource("Animation_scbx3"),
+&"show_game_over": SubResource("Animation_rxq5y")
+}
+
+[sub_resource type="FontVariation" id="FontVariation_scbx3"]
+base_font = ExtResource("8_5bkpt")
+
+[sub_resource type="Animation" id="Animation_terqw"]
+resource_name = "show_level_name"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LevelNameLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.663676, 2.46667, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LevelNameLabel:theme_override_fonts/font:spacing_glyph")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.666667),
+"transitions": PackedFloat32Array(1, 2),
+"update": 0,
+"values": [0, 20]
+}
+
+[sub_resource type="Animation" id="Animation_ea3vn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LevelNameLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LevelNameLabel:theme_override_fonts/font:spacing_glyph")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3m3x0"]
+_data = {
+&"RESET": SubResource("Animation_ea3vn"),
+&"show_level_name": SubResource("Animation_terqw")
+}
+
+[node name="PlayerHud" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_oghrr")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Control"]
+visible = false
+modulate = Color(0.932743, 0.931503, 0.908652, 1)
+layout_mode = 0
+offset_left = 1498.0
+offset_top = 11.0
+offset_right = 1684.0
+offset_bottom = 87.0
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("5_yhjvm")
+theme_override_font_sizes/font_size = 80
+text = "LIFE"
+horizontal_alignment = 1
+
+[node name="HFlowContainer" type="HFlowContainer" parent="Control"]
+layout_mode = 0
+offset_left = 1098.0
+offset_top = 91.0
+offset_right = 1760.0
+offset_bottom = 185.0
+theme_override_constants/h_separation = 20
+alignment = 2
+
+[node name="Heart" parent="Control/HFlowContainer" instance=ExtResource("2_alx7a")]
+layout_mode = 2
+
+[node name="Heart2" parent="Control/HFlowContainer" instance=ExtResource("2_alx7a")]
+layout_mode = 2
+
+[node name="Heart3" parent="Control/HFlowContainer" instance=ExtResource("2_alx7a")]
+layout_mode = 2
+
+[node name="Heart4" parent="Control/HFlowContainer" instance=ExtResource("2_alx7a")]
+layout_mode = 2
+
+[node name="Heart5" parent="Control/HFlowContainer" instance=ExtResource("2_alx7a")]
+layout_mode = 2
+
+[node name="Heart6" parent="Control/HFlowContainer" instance=ExtResource("2_alx7a")]
+layout_mode = 2
+
+[node name="Heart7" parent="Control/HFlowContainer" instance=ExtResource("2_alx7a")]
+layout_mode = 2
+
+[node name="Heart8" parent="Control/HFlowContainer" instance=ExtResource("2_alx7a")]
+layout_mode = 2
+
+[node name="Heart9" parent="Control/HFlowContainer" instance=ExtResource("2_alx7a")]
+layout_mode = 2
+
+[node name="Heart10" parent="Control/HFlowContainer" instance=ExtResource("2_alx7a")]
+layout_mode = 2
+
+[node name="Heart11" parent="Control/HFlowContainer" instance=ExtResource("2_alx7a")]
+layout_mode = 2
+
+[node name="Heart12" parent="Control/HFlowContainer" instance=ExtResource("2_alx7a")]
+layout_mode = 2
+
+[node name="Heart13" parent="Control/HFlowContainer" instance=ExtResource("2_alx7a")]
+layout_mode = 2
+
+[node name="Heart14" parent="Control/HFlowContainer" instance=ExtResource("2_alx7a")]
+layout_mode = 2
+
+[node name="Heart15" parent="Control/HFlowContainer" instance=ExtResource("2_alx7a")]
+layout_mode = 2
+
+[node name="Heart16" parent="Control/HFlowContainer" instance=ExtResource("2_alx7a")]
+layout_mode = 2
+
+[node name="Heart17" parent="Control/HFlowContainer" instance=ExtResource("2_alx7a")]
+layout_mode = 2
+
+[node name="Heart18" parent="Control/HFlowContainer" instance=ExtResource("2_alx7a")]
+layout_mode = 2
+
+[node name="Heart19" parent="Control/HFlowContainer" instance=ExtResource("2_alx7a")]
+layout_mode = 2
+
+[node name="Heart20" parent="Control/HFlowContainer" instance=ExtResource("2_alx7a")]
+layout_mode = 2
+
+[node name="Notification" type="Control" parent="Control"]
+process_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("4_sysqg")
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/Notification"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 30.0
+offset_right = 800.0
+offset_bottom = 165.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4b3j6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/Notification/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Notification/PanelContainer/VBoxContainer"]
+modulate = Color(0.923603, 0.0235132, 0.370199, 1)
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("5_yhjvm")
+theme_override_font_sizes/font_size = 48
+text = "Notification Type"
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="Control/Notification/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_yhjvm")
+theme_override_font_sizes/font_size = 48
+text = "Notification Message"
+autowrap_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/Notification"]
+libraries = {
+&"": SubResource("AnimationLibrary_yhjvm")
+}
+
+[node name="Sprite2D" type="Sprite2D" parent="Control"]
+position = Vector2(1828, 81)
+scale = Vector2(5, 5)
+texture = ExtResource("6_rxq5y")
+region_enabled = true
+region_rect = Rect2(48, 48, 32, 40)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"
+
+[node name="GameOver" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="GameOver"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.006, 0.006, 0.006, 0.791)
+
+[node name="Label" type="Label" parent="GameOver"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -436.0
+offset_top = -279.0
+offset_right = 420.0
+offset_bottom = -171.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("FontVariation_5bkpt")
+theme_override_font_sizes/font_size = 96
+text = "GAME OVER"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOver"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -101.5
+offset_top = -48.0
+offset_right = 101.5
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="continueButton" type="Button" parent="GameOver/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_yhjvm")
+theme_override_font_sizes/font_size = 48
+text = "continue"
+
+[node name="titleButton" type="Button" parent="GameOver/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_yhjvm")
+theme_override_font_sizes/font_size = 48
+text = "back to title"
+
+[node name="FadeToBlack" type="ColorRect" parent="GameOver"]
+layout_mode = 2
+offset_left = 910.0
+offset_top = 575.0
+offset_right = 1010.0
+offset_bottom = 575.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.006, 0.006, 0.006, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameOver"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_scbx3")
+}
+
+[node name="LevelName" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LevelNameLabel" type="Label" parent="LevelName"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 623.5
+offset_top = 485.0
+offset_right = 1256.5
+offset_bottom = 555.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("FontVariation_scbx3")
+theme_override_font_sizes/font_size = 96
+text = "LEVEL NAME"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LevelName"]
+libraries = {
+&"": SubResource("AnimationLibrary_3m3x0")
+}
