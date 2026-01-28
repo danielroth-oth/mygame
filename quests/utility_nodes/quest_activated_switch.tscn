@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpp0lp8p02lbk"]
+
+[ext_resource type="Script" uid="uid://dsk3mcj2oi3b6" path="res://quests/utility_nodes/quest_activated_switch.gd" id="1_1a44c"]
+[ext_resource type="Texture2D" uid="uid://3ctf48nn653t" path="res://quests/utility_nodes/icons/quest_switch.png" id="2_rmkwn"]
+
+[node name="QuestActivatedSwitch" type="Node2D"]
+script = ExtResource("1_1a44c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-12, -23)
+texture = ExtResource("2_rmkwn")

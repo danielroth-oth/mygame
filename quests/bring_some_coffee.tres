@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Quest" load_steps=5 format=3 uid="uid://brmjksmoqwp5o"]
+
+[ext_resource type="Script" uid="uid://dmigstfvbt8kq" path="res://quests/scripts/quest_reward_item.gd" id="1_205fl"]
+[ext_resource type="Resource" uid="uid://dcuqv7fjbhugv" path="res://Items/potion.tres" id="2_mqspe"]
+[ext_resource type="Script" uid="uid://bf5wre1jc8lwf" path="res://quests/scripts/quest_resource.gd" id="2_rmmpq"]
+
+[sub_resource type="Resource" id="Resource_sqh6x"]
+script = ExtResource("1_205fl")
+item = ExtResource("2_mqspe")
+quantity = 1
+metadata/_custom_type_script = "uid://dmigstfvbt8kq"
+
+[resource]
+script = ExtResource("2_rmmpq")
+title = "Bring Luna some Coffee"
+description = "Luna asked u to bringe her some Coffee too.
+Maybe u should go and grab some"
+steps = Array[String](["Go into ur Van", "Grab the Coffe", "Bring it to Luna"])
+reward_xp = 20
+reward_items = Array[ExtResource("1_205fl")]([SubResource("Resource_sqh6x")])
+metadata/_custom_type_script = "uid://bf5wre1jc8lwf"
