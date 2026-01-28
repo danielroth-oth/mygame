@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://bihnqnuayppk4"]
+
+[ext_resource type="Texture2D" uid="uid://dfiajlyshydqp" path="res://Battle/Player_Char/Battel_Witch_Test.png" id="2_2ug3i"]
+[ext_resource type="Texture2D" uid="uid://vr0asd4vltyy" path="res://Battle/Player_Char/Battel_withc medium.png" id="2_djv8u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tw7td"]
+atlas = ExtResource("2_2ug3i")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w2ey8"]
+atlas = ExtResource("2_2ug3i")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ug3i"]
+atlas = ExtResource("2_djv8u")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fnonq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tw7td")
+}],
+"loop": true,
+"name": &"Attack",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w2ey8")
+}],
+"loop": false,
+"name": &"Block",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ug3i")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 6.0
+}]
+
+[node name="battel_player" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_fnonq")
+animation = &"Idle"
