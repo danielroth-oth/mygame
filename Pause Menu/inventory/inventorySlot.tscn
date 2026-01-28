@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgvwqb12lu8wi"]
+
+[ext_resource type="Texture2D" uid="uid://by1uk71e3chih" path="res://Items/sprites/Skull.png" id="1_2n4sv"]
+[ext_resource type="Script" uid="uid://bypk50f8v7tje" path="res://GUI/Pause Menu/inventory/scripts/inventoy_slot_ui.gd" id="1_8aljm"]
+[ext_resource type="FontFile" uid="uid://ctjlorknwrmhg" path="res://GUI/fonts/m5x7.ttf" id="2_2n4sv"]
+
+[node name="InventorySlot" type="Button"]
+custom_minimum_size = Vector2(96, 96)
+offset_right = 96.0
+offset_bottom = 96.0
+script = ExtResource("1_8aljm")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 96.0
+texture = ExtResource("1_2n4sv")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -5.0
+offset_top = 5.0
+offset_right = 92.0
+offset_bottom = 103.0
+theme_override_fonts/font = ExtResource("2_2n4sv")
+theme_override_font_sizes/font_size = 32
+text = "99"
+horizontal_alignment = 2

@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://cara5p3cx7j1k"]
+
+[ext_resource type="Script" uid="uid://cfenqf2ekg57r" path="res://GUI/Pause Menu/quests/quest_step_item.gd" id="1_oqsgc"]
+[ext_resource type="FontFile" uid="uid://ctjlorknwrmhg" path="res://GUI/fonts/m5x7.ttf" id="2_0dh2v"]
+[ext_resource type="Texture2D" uid="uid://bxrnxqrsvtou2" path="res://GUI/Pause Menu/quests/checkbox.png" id="2_dpt4c"]
+
+[node name="QuestStepItem" type="Control"]
+custom_minimum_size = Vector2(850, 80)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 850.0
+offset_bottom = 88.0
+script = ExtResource("1_oqsgc")
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(0.607843, 0.678431, 0.717647, 1)
+layout_mode = 0
+offset_left = 44.0
+offset_top = 7.0
+offset_right = 113.0
+offset_bottom = 45.0
+theme_override_fonts/font = ExtResource("2_0dh2v")
+theme_override_font_sizes/font_size = 48
+text = "Step"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(18, 29)
+scale = Vector2(2.25, 2.25)
+texture = ExtResource("2_dpt4c")
+hframes = 2
